@@ -1,0 +1,39 @@
+﻿@model List<CRUD.Models.ViewModels.ListTiendasViewModel>
+@{
+    ViewBag.Title = "Mis Tiendas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Tiendas/NuevaT" class="btn btn-primary">Nueva Tienda</a>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Fecha de Apertura</th>
+                <th></th>
+            </tr>
+            @foreach(var oT in Model)
+            {
+                <tr>
+                    <td>@oT.ID</td>
+                    <td>@oT.Nombre</td>
+                    <td>@oT.Fecha_de_Apertura.ToString("dd-MM-yyyy")</td>
+                    <td>
+                        <a class="btn btn-default" href="~/Tiendas/EditarT/@oT.ID">Editar</a>
+                        <a class="btn btn-danger" href="~/Tiendas/EliminarT/@oT.ID">Eliminar</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+

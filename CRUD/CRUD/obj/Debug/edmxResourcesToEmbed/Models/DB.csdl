@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TredaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="SKU" />
+    </Key>
+    <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SKU" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Valor" Type="Int32" Nullable="false" />
+    <Property Name="Tienda" Type="Int32" Nullable="false" />
+    <Property Name="Imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Tiendas" Relationship="Self.FK_Productos_Tienda" FromRole="Productos" ToRole="Tiendas" />
+  </EntityType>
+  <EntityType Name="Tiendas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha_de_Apertura" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Productos" Relationship="Self.FK_Productos_Tienda" FromRole="Tiendas" ToRole="Productos" />
+  </EntityType>
+  <Association Name="FK_Productos_Tienda">
+    <End Role="Tiendas" Type="Self.Tiendas" Multiplicity="1" />
+    <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tiendas">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Productos">
+        <PropertyRef Name="Tienda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TredaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Productos" EntityType="Self.Productos" />
+    <EntitySet Name="Tiendas" EntityType="Self.Tiendas" />
+    <AssociationSet Name="FK_Productos_Tienda" Association="Self.FK_Productos_Tienda">
+      <End Role="Tiendas" EntitySet="Tiendas" />
+      <End Role="Productos" EntitySet="Productos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

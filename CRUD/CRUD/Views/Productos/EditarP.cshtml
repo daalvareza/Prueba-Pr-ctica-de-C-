@@ -1,0 +1,49 @@
+﻿@model CRUD.Models.ViewModels.ProductosViewModel
+@{
+    ViewBag.Title = "Editar Producto";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("EditarP", "Productos", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.HiddenFor(d=>d.SKU)
+            <br />
+            <div>
+                @Html.LabelFor(d => d.Nombre)
+                @Html.TextBoxFor(d => d.Nombre, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Nombre, null, new { @class = "danger" })<br />
+            </div>
+            <div>
+                <br />
+                @Html.LabelFor(d => d.Descripcion)<br />
+                @Html.EditorFor(d => d.Descripcion, "", new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(d => d.Descripcion, null, new { @class = "danger" })
+            </div>
+            <div>
+                <br />
+                @Html.LabelFor(d => d.Valor)<br />
+                @Html.EditorFor(d => d.Valor, "", new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(d => d.Valor, null, new { @class = "danger" })
+            </div>
+            <div>
+                <br />
+                @Html.LabelFor(d => d.Tienda)<br />
+                @Html.EditorFor(d => d.Tienda, "", new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(d => d.Tienda, null, new { @class = "danger" })
+            </div>
+            <div>
+                <br />
+                @Html.LabelFor(d => d.Imagen)<br />
+                @Html.EditorFor(d => d.Imagen, "", new { @class = "form-control" })<br />
+                @Html.ValidationMessageFor(d => d.Imagen, null, new { @class = "danger" })
+            </div>
+            <div style="text-align:right">
+                <input value="Confirmar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+    </div>
+}
